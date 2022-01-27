@@ -219,11 +219,13 @@ namespace letme.ViewModels
             SelectedCommand.CommandActions.Insert(index, SelectedCommandActionDuplicate);
 
             SelectedActionIndex = index;
-            
-            Task.Factory.StartNew(() =>
-            {
-                Refresh();
-            });
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    Refresh();
+            //});
+
+            Refresh();
 
             Editing = false;
 

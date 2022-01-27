@@ -11,5 +11,10 @@ namespace letme.Views
         {
             InitializeComponent();
         }
+
+        private void LB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LB.ScrollIntoView(LB.SelectedItem);
+        }
     }
 }

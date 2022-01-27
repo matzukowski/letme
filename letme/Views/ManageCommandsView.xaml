@@ -31,7 +31,7 @@
         </Grid.ColumnDefinitions>
 
         <GroupBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2" Header="available commands" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-            <ListBox Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas"
+            <ListBox Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" Name="LB" SelectionChanged="LB_SelectionChanged"
                      ItemsSource="{Binding SpeechRecognition.Commands, UpdateSourceTrigger=PropertyChanged}"
                      SelectedIndex="{Binding SelectedIndex}"
                      SelectedItem="{Binding SelectedItem}"/>
@@ -43,11 +43,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="add" Command="{Binding NewButtonClickCommand}"/>
                 <Button Grid.Column="1" Margin="1 2 1 2" Padding="10 3" Content="edit" Command="{Binding EditButtonClickCommand}"/>
-                <Button Grid.Column="2" Margin="1 2 0 2" Padding="10 3" Content="delete" Command="{Binding DeleteCommand}"/>
+                <Button Grid.Column="2" Margin="1 2 1 2" Padding="10 3" Content="duplicate" Command="{Binding DuplicateCommand}"/>
+                <Button Grid.Column="3" Margin="1 2 0 2" Padding="10 3" Content="delete" Command="{Binding DeleteCommand}"/>
             </Grid>
         </GroupBox>
 
@@ -63,13 +65,13 @@
                 </Grid.ColumnDefinitions>
 
                 <GroupBox Grid.Row="0" Grid.Column="0" Margin="0 2 1 2" Header="phrase" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-                    <TextBlock Margin="2" Background="Black" Foreground="White" FontFamily="Consolas" Text="{Binding SelectedItem.Phrase}"/>
+                    <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" IsReadOnly="True" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto"
+                               Text="{Binding SelectedItem.Phrase}"/>
                 </GroupBox>
 
                 <GroupBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="1 2 0 2" Header="actions" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="2" Background="Black" Foreground="White" FontFamily="Consolas" Text="{Binding SelectedItem, Converter={StaticResource CommandDetailsToStringConverter}}"/>
-                    </StackPanel>
+                    <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" IsReadOnly="True" TextWrapping="NoWrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                Text="{Binding SelectedItem, Converter={StaticResource CommandDetailsToStringConverter}}"/>
                 </GroupBox>
             </Grid>
         </GroupBox>

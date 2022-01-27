@@ -17,6 +17,7 @@ namespace letme.ViewModels
 
         public DelegateCommand EditButtonClickCommand { get; private set; }
         public DelegateCommand NewButtonClickCommand { get; private set; }
+        public DelegateCommand DuplicateCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
         public DelegateCommand GoBackCommand { get; private set; }
 
@@ -49,6 +50,7 @@ namespace letme.ViewModels
 
             EditButtonClickCommand = new DelegateCommand(OpenEditCommandWindow);
             NewButtonClickCommand = new DelegateCommand(OpenNewCommandWindow);
+            DuplicateCommand = new DelegateCommand(Duplicate);
             DeleteCommand = new DelegateCommand(Delete);
             GoBackCommand = new DelegateCommand(GoBack);
 
@@ -91,6 +93,16 @@ namespace letme.ViewModels
             };
 
             _regionManager.RequestNavigate(Names.contentRegion, Names.editCommandView, parameters);
+        }
+
+        private void Duplicate()
+        {
+            if (SelectedIndex > -1)
+            {
+                SpeechRecognition.Commands.Insert(SelectedIndex + 1, new Command(SelectedItem));
+
+                SelectedIndex++;
+            }
         }
 
         private void Delete()

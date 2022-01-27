@@ -60,7 +60,7 @@ namespace letme.ViewModels
 
         private void OpenSettingsView()
         {
-
+            //_regionManager.RequestNavigate(Names.contentRegion, Names.settingsView);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

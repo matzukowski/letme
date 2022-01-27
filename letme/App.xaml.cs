@@ -21,10 +21,10 @@ namespace letme
             //containerRegistry.RegisterForNavigation<ConsoleView>(Names.consoleView);
             //containerRegistry.RegisterForNavigation<CommandListView>(Names.consoleView);
             containerRegistry.RegisterForNavigation<StartScreenView>(Names.startScreenView);
-
             containerRegistry.RegisterForNavigation<ManageCommandsView>(Names.manageCommandsView);
             containerRegistry.RegisterForNavigation<EditCommandView>(Names.editCommandView);
             containerRegistry.RegisterForNavigation<RefreshView>(Names.refresView);
+            //containerRegistry.RegisterForNavigation<SettingsView>(Names.settingsView);
 
             containerRegistry.RegisterSingleton<SpeechRecognition, SpeechRecognition>();
         }

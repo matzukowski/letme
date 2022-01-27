@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <GroupBox Grid.Row="0" Margin="2" Header="phrase" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-            <TextBox Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" TextWrapping="NoWrap"
+            <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto"
                      Text="{Binding SelectedCommand.Phrase}"/>
         </GroupBox>
 
@@ -67,7 +67,7 @@
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Grid.Row="0" Grid.Column="0" Margin="0 2 0 2" Grid.ColumnSpan="3" Header="parameter" Background="Transparent" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-                        <TextBox Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" TextWrapping="NoWrap"
+                        <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto"
                              Text="{Binding SelectedCommandActionDuplicate.Parameter}"/>
                     </GroupBox>
 
@@ -111,7 +111,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="action editor here" Background="Transparent" Foreground="White" FontFamily="Consolas"/>
                     <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Text="start editing action from sector above" Background="Transparent" Foreground="White" FontFamily="Consolas"/>
                 </Grid>
@@ -121,13 +121,13 @@
         <GroupBox Grid.Row="3" Margin="2" Header="done?" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
             <Grid>
                 <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="cancel" Command="{Binding DoneCancelCommand}"/>
-                <Button Grid.Column="1" Margin="1 2 0 2" Padding="10 3" Content="confirm" Command="{Binding DoneConfirmCommand}"/>
-            </Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="cancel" Command="{Binding DoneCancelCommand}"/>
+                    <Button Grid.Column="1" Margin="1 2 0 2" Padding="10 3" Content="confirm" Command="{Binding DoneConfirmCommand}"/>
+                </Grid>
                 <Grid Background="Black" Opacity="1" Visibility="{Binding Editing, Converter={StaticResource BoolToVisilityConverter}}">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="finish editing first" Background="Transparent" Foreground="White" FontFamily="Consolas"/>
                 </Grid>

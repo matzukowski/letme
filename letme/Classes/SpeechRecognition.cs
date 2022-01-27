@@ -86,8 +86,6 @@ namespace letme.Classes
         {
             List<Command> defaultCommands = new List<Command>();
 
-            //defaultCommands.Add(new Command("fuck", new List<ActionType> { ActionType.Say }, new List<string> { "fuck yeah" }));
-
             defaultCommands.Add(new Command("left", new ObservableCollection<ActionType> { ActionType.stroke }, new List<string> { "a" }));
             defaultCommands.Add(new Command("right", new ObservableCollection<ActionType> { ActionType.stroke }, new List<string> { "d" }));
             defaultCommands.Add(new Command("jump", new ObservableCollection<ActionType> { ActionType.stroke }, new List<string> { "Space" }));
@@ -117,27 +115,27 @@ namespace letme.Classes
             IsActive = false;
         }
 
-        public void AddCommand(string phrase, ObservableCollection<ActionType> actionTypes, List<String> parameters) //TODO: zjebane
-        {
-            if (Commands.Where(c => c.Phrase == phrase).Count() == 0)
-            {
-                Commands.Add(new Command("fuck", actionTypes, parameters));
-            }
-        }
+        //public void AddCommand(string phrase, ObservableCollection<ActionType> actionTypes, List<String> parameters) // zbędne
+        //{
+        //    if (Commands.Where(c => c.Phrase == phrase).Count() == 0)
+        //    {
+        //        Commands.Add(new Command("fuck", actionTypes, parameters));
+        //    }
+        //}
 
-        public void EditCommand(string oldPhrase, string newPhrase, ObservableCollection<ActionType> actionTypes, List<String> parameters)
-        {
-            int index = Commands.IndexOf(Commands.FirstOrDefault(c => c.Phrase == oldPhrase));
+        //public void EditCommand(string oldPhrase, string newPhrase, ObservableCollection<ActionType> actionTypes, List<String> parameters)
+        //{
+        //    int index = Commands.IndexOf(Commands.FirstOrDefault(c => c.Phrase == oldPhrase));
 
-            Commands[index] = new Command(newPhrase, actionTypes, parameters);
-        }
+        //    Commands[index] = new Command(newPhrase, actionTypes, parameters);
+        //}
 
-        public void DeleteCommand(string phrase)
-        {
-            int index = Commands.IndexOf(Commands.FirstOrDefault(c => c.Phrase == phrase));
+        //public void DeleteCommand(string phrase)
+        //{
+        //    int index = Commands.IndexOf(Commands.FirstOrDefault(c => c.Phrase == phrase));
             
-            Commands.RemoveAt(index);
-        }
+        //    Commands.RemoveAt(index);
+        //}
 
         // Handle the SpeechRecognized event.  
         public async void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -260,5 +258,5 @@ namespace letme.Classes
 
 
 
-//TODO: Dodatkowe okno z komendami on/off
-//
+//TODO: (anulowane) Dodatkowe okno z komendami on/off
+//TODO: (anulowane) zamiast boola, można dodawać znak specjalny na początku komendy, która ma zostać wyłączona, o!

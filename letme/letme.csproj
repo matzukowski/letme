@@ -63,7 +63,7 @@
     <Compile Include="Classes\ActionType.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="ViewModels\EditCommandViewModel.cs" />
-    <Compile Include="ViewModels\MenageCommandsViewModel.cs" />
+    <Compile Include="ViewModels\ManageCommandsViewModel.cs" />
     <Compile Include="ViewModels\RefreshViewModel.cs" />
     <Compile Include="ViewModels\StartScreenViewModel.cs" />
     <Compile Include="Views\EditCommandView.xaml.cs">

@@ -12,6 +12,7 @@ namespace letme.Classes
         public static string startScreenView = "startScreenView";
         public static string manageCommandsView = "manageCommandsView";
         public static string editCommandView = "editCommandView";
+        //public static string settingsView = "settingsView";
         public static string refresView = "refresView";
 
         //regions
