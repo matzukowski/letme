@@ -3,17 +3,17 @@ using letme.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace letme.ViewModels
 {
-    //[RegionMemberLifetime(KeepAlive = false)]
     public class MainWindowViewModel : BindableBase
     {
+        private string _filesPath;
+
         public DelegateCommand ClosingCommand { get; private set; }
 
         private SpeechRecognition _speechRecognition;
@@ -30,21 +30,30 @@ namespace letme.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private string _ascii;
+        public string ASCII
+        {
+            get { return _ascii; }
+            set { SetProperty(ref _ascii, value); }
+        }
+
         public MainWindowViewModel(IRegionManager regionManager, SpeechRecognition speechRecognition)
         {
-            //regionManager.RegisterViewWithRegion(Names.consoleViewRegion, typeof(ConsoleView));
-            //regionManager.RegisterViewWithRegion(Names.commandListViewRegion, typeof(CommandListView));
+            string exeFile = new System.Uri(Assembly.GetEntryAssembly().CodeBase).AbsolutePath;
+
+            string exeDir = Path.GetDirectoryName(exeFile);
+
+            _filesPath = Path.Combine(exeDir, @"..\..\Files").Replace("%20", " ");
+
+            StreamReader reader = new StreamReader(_filesPath + @"\ASCII.txt", Encoding.GetEncoding(850));
+
+            ASCII = reader.ReadToEnd();
 
             regionManager.RegisterViewWithRegion(Names.contentRegion, typeof(StartScreenView));
 
             _speechRecognition = speechRecognition;
 
             ClosingCommand = new DelegateCommand(new Action(Closing));
-        }
-
-        private void Refresh()
-        {
-
         }
 
         private void Closing()

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
 using System.Threading;
@@ -16,6 +17,8 @@ namespace letme.Classes
 {
     public class SpeechRecognition : BindableBase, INotifyPropertyChanged
     {
+        private string _filesPath;
+
         SpeechRecognitionEngine _recognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-GB"));
 
         SpeechSynthesizer _synthesizer = new SpeechSynthesizer();
@@ -46,6 +49,12 @@ namespace letme.Classes
 
         public SpeechRecognition()
         {
+            string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
+            
+            string exeDir = Path.GetDirectoryName(exeFile);
+
+            _filesPath = Path.Combine(exeDir, @"..\..\Files").Replace("%20", " ");
+
             // Configure the audio output.   
             _synthesizer.SetOutputToDefaultAudioDevice();
 
@@ -53,13 +62,13 @@ namespace letme.Classes
 
             LoadFromJSON();
 
-            LoadDefaultCommands();
+            //LoadDefaultCommands();
 
             foreach (Command command in Commands)
             {
                 if (command.Phrase != null)
                 {
-                    _vocabulary.Add(command.Phrase);
+                    AddVocabulary(command.Phrase);
                 }
             }
 
@@ -115,6 +124,11 @@ namespace letme.Classes
             IsActive = false;
         }
 
+        public void AddVocabulary(string phrase)
+        {
+            _vocabulary.Add(phrase);
+        }
+
         //public void AddCommand(string phrase, ObservableCollection<ActionType> actionTypes, List<String> parameters) // zbędne
         //{
         //    if (Commands.Where(c => c.Phrase == phrase).Count() == 0)
@@ -154,9 +168,9 @@ namespace letme.Classes
 
         public void LoadFromJSON()
         {
-            if (File.Exists("commands.json"))
+            if (File.Exists(_filesPath + "/commands.json"))
             {
-                var json = File.ReadAllText("../../Files/commands.json");
+                var json = File.ReadAllText(_filesPath + "/commands.json");
 
                 var serializer = new JavaScriptSerializer();
 
@@ -169,7 +183,7 @@ namespace letme.Classes
 
             var json = serializer.Serialize(Commands.Where(command => command.Phrase != null));
 
-            File.WriteAllText("../../Files/commands.json", json);
+            File.WriteAllText(_filesPath + "/commands.json", json);
         }
 
         private void RunCommand(Command command)
@@ -241,7 +255,9 @@ namespace letme.Classes
 
         public void TypeString(string parameter)
         {
-            Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", @"C:\Scripts\KeyStroke.ahk " + parameter);
+            string aaa = "C:\\Users\\Imm Imm\\Desktop\\Kod\\letme\\letme\\Files";
+
+            Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", aaa + @"\KeyStroke.ahk " + parameter);
         }
 
         public void Wait(string parameter)
@@ -260,3 +276,5 @@ namespace letme.Classes
 
 //TODO: (anulowane) Dodatkowe okno z komendami on/off
 //TODO: (anulowane) zamiast boola, można dodawać znak specjalny na początku komendy, która ma zostać wyłączona, o!
+//TODO: aktualizowanie JSONA
+//TODO: aktualizowanie słownika

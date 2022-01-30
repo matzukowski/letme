@@ -6,7 +6,7 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:classes="clr-namespace:letme.Classes"
         Title="{Binding Title}"
-        MinWidth="1000" MinHeight="600" Width="1000" Height="600" Background="Black">
+        MinWidth="1000" MinHeight="700" Width="1000" Height="700" Background="Black" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Closing">
@@ -15,6 +15,11 @@
     </b:Interaction.Triggers>
 
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="{x:Static classes:Names.contentRegion}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding ASCII}" FontSize="12" Background="Black" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static classes:Names.contentRegion}"/>
     </Grid>
 </Window>

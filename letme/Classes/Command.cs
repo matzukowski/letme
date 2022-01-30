@@ -22,6 +22,8 @@ namespace letme.Classes
             set { SetProperty(ref _commandActions, value); }
         }
 
+        public Command() { }
+
         public Command(string phrase, ObservableCollection<ActionType> actionTypes, List<String> parameters)
         {
             this.Phrase = phrase;

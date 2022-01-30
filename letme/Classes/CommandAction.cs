@@ -19,6 +19,8 @@ namespace letme.Classes
             set { SetProperty(ref _parameter, value); }
         }
 
+        public CommandAction() { }
+
         public CommandAction(ActionType actionType, string parameter)
         {
             this.ActionType = actionType;

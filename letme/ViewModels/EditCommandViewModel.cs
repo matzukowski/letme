@@ -156,8 +156,6 @@ namespace letme.ViewModels
         {
             if (SelectedActionIndex > -1)
             {
-                _addingNew = true;
-
                 SelectedCommand.CommandActions.Insert(SelectedActionIndex + 1, new CommandAction(SelectedCommandAction));
 
                 SelectedCommandActionDuplicate = new CommandAction(SelectedCommandAction);
@@ -247,6 +245,8 @@ namespace letme.ViewModels
                 Delete();
 
                 SelectedActionIndex = SelectedActionIndex + offset;
+
+                _addingNew = false;
             }
         }
 
