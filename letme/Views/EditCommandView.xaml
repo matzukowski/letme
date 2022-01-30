@@ -83,18 +83,6 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Grid.Row="1" Grid.Column="1" Margin="1 2 1 2" Header="additional button" Background="Transparent" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-                        <StackPanel>
-                            <CheckBox Content="alt"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                            <CheckBox Content="ctrl"     Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                            <CheckBox Content="del"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                            <CheckBox Content="esc"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                            <CheckBox Content="shift"    Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                            <CheckBox Content="tab"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                            <CheckBox Content="win"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas"/>
-                        </StackPanel>
-                    </GroupBox>
-
                     <GroupBox Grid.Row="1" Grid.Column="2" Margin="1 2 0 2" Header="ready?" Background="Transparent" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
                         <Grid>
                             <Grid.RowDefinitions>

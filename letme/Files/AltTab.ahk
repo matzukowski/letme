@@ -1,1 +1,1 @@
-﻿Send, {ALT DOWN}{TAB}{ALT UP}
+﻿Send, !{TAB}

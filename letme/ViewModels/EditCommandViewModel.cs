@@ -218,16 +218,11 @@ namespace letme.ViewModels
 
             SelectedActionIndex = index;
 
-            //Task.Factory.StartNew(() =>
-            //{
-            //    Refresh();
-            //});
-
-            Refresh();
-
             Editing = false;
 
             _addingNew = false;
+
+            Refresh();
         }
 
         private void CancelChanges()
@@ -242,6 +237,7 @@ namespace letme.ViewModels
                 {
                     offset = -1;
                 }
+
                 Delete();
 
                 SelectedActionIndex = SelectedActionIndex + offset;
@@ -252,6 +248,8 @@ namespace letme.ViewModels
 
         private void DoneCancel()
         {
+            SpeechRecognition.SaveToJSON();
+
             NavigationParameters parameters = new NavigationParameters
             {
                 { "SelectedIndex", SelectedCommandIndex }
@@ -272,6 +270,10 @@ namespace letme.ViewModels
             {
                 SpeechRecognition.Commands[SelectedCommandIndex] = SelectedCommand;
             }
+
+            SpeechRecognition.SaveToJSON();
+
+            SpeechRecognition.AddVocabulary(SelectedCommand.Phrase);
 
             NavigationParameters parameters = new NavigationParameters
             {

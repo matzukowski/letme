@@ -1,5 +1,6 @@
 ﻿using letme.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 
 namespace letme.Views
 {
@@ -11,6 +12,11 @@ namespace letme.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

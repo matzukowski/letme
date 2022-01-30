@@ -6,7 +6,11 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:classes="clr-namespace:letme.Classes"
         Title="{Binding Title}"
-        MinWidth="1000" MinHeight="700" Width="1000" Height="700" Background="Black" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow">
+        WindowState="{Binding WindowState}"
+        ResizeMode="CanMinimize" WindowStyle="None"
+        MinWidth="1000" MinHeight="700" Width="1000" Height="700" 
+        Background="Black"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Closing">
@@ -14,12 +18,38 @@
         </b:EventTrigger>
     </b:Interaction.Triggers>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding ASCII}" FontSize="12" Background="Black" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static classes:Names.contentRegion}"/>
-    </Grid>
+    <Border BorderBrush="White" BorderThickness="2" Padding="8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" FontSize="12" Background="Black" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Text="{Binding ASCII}"/>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" FontSize="6" FontWeight="Bold" Margin="0 -6 0 0" Background="Black" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       Text="{Binding ASCII_Minimize}">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding MinimizeCommand}" MouseAction="LeftClick"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
+                <TextBlock Grid.Column="2" FontSize="6" FontWeight="Bold" Margin="2 -6 2 0" Background="Black" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       Text="{Binding ASCII_Close}">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding CloseCommand}" MouseAction="LeftClick"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
+            </Grid>
+
+            <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static classes:Names.contentRegion}"/>
+        </Grid>
+    </Border>
 </Window>

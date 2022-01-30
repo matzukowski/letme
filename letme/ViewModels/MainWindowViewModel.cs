@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Windows;
 
 namespace letme.ViewModels
 {
@@ -14,6 +15,8 @@ namespace letme.ViewModels
     {
         private string _filesPath;
 
+        public DelegateCommand MinimizeCommand { get; private set; }
+        public DelegateCommand CloseCommand { get; private set; }
         public DelegateCommand ClosingCommand { get; private set; }
 
         private SpeechRecognition _speechRecognition;
@@ -36,6 +39,27 @@ namespace letme.ViewModels
             get { return _ascii; }
             set { SetProperty(ref _ascii, value); }
         }
+        
+        private string _ascii_Minimize;
+        public string ASCII_Minimize
+        {
+            get { return _ascii_Minimize; }
+            set { SetProperty(ref _ascii_Minimize, value); }
+        }
+        
+        private string _ascii_Close;
+        public string ASCII_Close
+        {
+            get { return _ascii_Close; }
+            set { SetProperty(ref _ascii_Close, value); }
+        }
+
+        private WindowState _windowState;
+        public WindowState WindowState
+        {
+            get { return _windowState; }
+            set { SetProperty(ref _windowState, value); }
+        }
 
         public MainWindowViewModel(IRegionManager regionManager, SpeechRecognition speechRecognition)
         {
@@ -49,16 +73,38 @@ namespace letme.ViewModels
 
             ASCII = reader.ReadToEnd();
 
+            reader = new StreamReader(_filesPath + @"\ASCII_Minimize.txt", Encoding.GetEncoding(850));
+
+            ASCII_Minimize = reader.ReadToEnd();
+
+            reader = new StreamReader(_filesPath + @"\ASCII_Close.txt", Encoding.GetEncoding(850));
+
+            ASCII_Close = reader.ReadToEnd();
+
             regionManager.RegisterViewWithRegion(Names.contentRegion, typeof(StartScreenView));
 
-            _speechRecognition = speechRecognition;
+            SpeechRecognition = speechRecognition;
+
+            MinimizeCommand = new DelegateCommand(new Action(MinimizeApp));
+
+            CloseCommand = new DelegateCommand(new Action(CloseApp));
 
             ClosingCommand = new DelegateCommand(new Action(Closing));
         }
 
+        private void MinimizeApp()
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void CloseApp()
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
         private void Closing()
         {
-            _speechRecognition.SaveToJSON();
+            SpeechRecognition.SaveToJSON();
         }
     }
 }

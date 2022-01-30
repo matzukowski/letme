@@ -102,6 +102,8 @@ namespace letme.ViewModels
                 SpeechRecognition.Commands.Insert(SelectedIndex + 1, new Command(SelectedItem));
 
                 SelectedIndex++;
+
+                SpeechRecognition.SaveToJSON();
             }
         }
 
@@ -118,7 +120,12 @@ namespace letme.ViewModels
                     if (temp < SpeechRecognition.Commands.Count) SelectedIndex = temp;
                     else SelectedIndex = temp - 1;
                 }
-                else SelectedItem = null;
+                else
+                {
+                    SelectedItem = null;
+                }
+
+                SpeechRecognition.SaveToJSON();
             }
         }
 

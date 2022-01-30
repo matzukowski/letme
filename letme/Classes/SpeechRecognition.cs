@@ -19,11 +19,9 @@ namespace letme.Classes
     {
         private string _filesPath;
 
-        SpeechRecognitionEngine _recognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-GB"));
+        private SpeechRecognitionEngine _recognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-GB"));
 
-        SpeechSynthesizer _synthesizer = new SpeechSynthesizer();
-
-        Choices _vocabulary = new Choices();
+        private SpeechSynthesizer _synthesizer = new SpeechSynthesizer();
 
 
         private ObservableCollection<Command> _commands = new ObservableCollection<Command>();
@@ -72,17 +70,10 @@ namespace letme.Classes
                 }
             }
 
-            _vocabulary.Add("hi");
-
-            Grammar grammar = new Grammar(new GrammarBuilder(_vocabulary));
-
             _recognizer.RequestRecognizerUpdate();
 
             // Create and load a dictation grammar. 
             _recognizer.LoadGrammar(new DictationGrammar());
-
-            // Add our vocabulary
-            _recognizer.LoadGrammar(grammar);
 
             // Add a handler for the speech recognized event.  
             _recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(Recognizer_SpeechRecognized);
@@ -126,7 +117,12 @@ namespace letme.Classes
 
         public void AddVocabulary(string phrase)
         {
-            _vocabulary.Add(phrase);
+            Choices vocabulary = new Choices(phrase);
+
+            Grammar grammar = new Grammar(new GrammarBuilder(vocabulary));
+
+            // Add our vocabulary
+            _recognizer.LoadGrammar(grammar);
         }
 
         //public void AddCommand(string phrase, ObservableCollection<ActionType> actionTypes, List<String> parameters) // zbędne
@@ -147,7 +143,7 @@ namespace letme.Classes
         //public void DeleteCommand(string phrase)
         //{
         //    int index = Commands.IndexOf(Commands.FirstOrDefault(c => c.Phrase == phrase));
-            
+
         //    Commands.RemoveAt(index);
         //}
 
@@ -255,9 +251,12 @@ namespace letme.Classes
 
         public void TypeString(string parameter)
         {
-            string aaa = "C:\\Users\\Imm Imm\\Desktop\\Kod\\letme\\letme\\Files";
+            string aa = _filesPath;
 
-            Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", aaa + @"\KeyStroke.ahk " + parameter);
+            string aaa = @"C:\Users\Imm Imm\Desktop\Kod\letme\letme\Files" + @"\KeyStroke.ahk ";
+
+            //var result = Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", aaa + parameter);
+            var result = Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", @"C:\Users\Imm Imm\Desktop\Kod\letme\letme\Files\KeyStroke.ahk a");
         }
 
         public void Wait(string parameter)
@@ -272,9 +271,8 @@ namespace letme.Classes
     }
 }
 
-
-
-//TODO: (anulowane) Dodatkowe okno z komendami on/off
-//TODO: (anulowane) zamiast boola, można dodawać znak specjalny na początku komendy, która ma zostać wyłączona, o!
-//TODO: aktualizowanie JSONA
-//TODO: aktualizowanie słownika
+//TODO: skrypty nie działają
+//TODO: ścieżka do folderu ze skryptami musi być bez spacji :/
+//TODO: ^ plik konfiguracyjny ze ścieżkami do plików?
+//TODO: samouczek https://www.autohotkey.com/docs/commands/Send.htm
+//TODO: skrypt na trzymanie i puszczanie klawisza
