@@ -13,6 +13,8 @@ namespace letme.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        public string Title => "letme";
+
         private string _filesPath;
 
         public DelegateCommand MinimizeCommand { get; private set; }
@@ -24,13 +26,6 @@ namespace letme.ViewModels
         {
             get { return _speechRecognition; }
             set { SetProperty(ref _speechRecognition, value); }
-        }
-
-        private string _title = "letme";
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
         }
 
         private string _ascii;
@@ -99,7 +94,7 @@ namespace letme.ViewModels
 
         private void CloseApp()
         {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
         private void Closing()

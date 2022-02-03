@@ -46,7 +46,7 @@
                 <Button Grid.Column="0" Padding="10 3" Margin="0 2 1 2" Content="start"
                         IsEnabled="{Binding SpeechRecognition.IsActive, Converter={StaticResource NegationConverter}}"
                         Command="{Binding StartCommand}"/>
-                
+
                 <Button Grid.Column="1" Padding="10 3" Margin="1 2 0 2" Content="stop"
                         IsEnabled="{Binding SpeechRecognition.IsActive}"
                         Command="{Binding StopCommand}"/>
@@ -64,7 +64,6 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <!--<Button Grid.Column="0" Padding="10 3" Margin="0 2 1 2" Content="settings" IsEnabled="{Binding SpeechRecognition.IsActive, Converter={StaticResource NegationConverter}}" Command="{Binding OpenSettingsViewCommand}"/>-->
                     <Button Grid.Column="0" Padding="10 3" Margin="0 2 0 2" Content="manage commands"
                             IsEnabled="{Binding SpeechRecognition.IsActive, Converter={StaticResource NegationConverter}}"
                             Command="{Binding OpenManageCommandsViewCommand}"/>

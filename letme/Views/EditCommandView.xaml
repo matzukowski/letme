@@ -73,11 +73,11 @@
                     <GroupBox Grid.Row="1" Grid.Column="0" Margin="0 2 1 2" Header="type" Background="Transparent" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
                         <StackPanel>
                             <RadioButton Content="say"              Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=say}"/>
-                            <RadioButton Content="stroke button"    Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=stroke}"/>
+                            <RadioButton Content="press button"     Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=press}"/>
                             <RadioButton Content="hold button"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=hold}"/>
                             <RadioButton Content="release button"   Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=release}"/>
                             <RadioButton Content="type text"        Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=type}"/>
-                            <RadioButton Content="wait (ms)"             Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=wait}"/>
+                            <RadioButton Content="wait (ms)"        Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=wait}"/>
                             <RadioButton Content="run program"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=run}"/>
                         </StackPanel>
                     </GroupBox>
@@ -115,8 +115,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="action editor here" Background="Transparent" Foreground="White" FontFamily="Consolas"/>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Text="start editing action from sector above" Background="Transparent" Foreground="White" FontFamily="Consolas"/>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="action editor here"                     Background="Transparent" Foreground="White" FontFamily="Consolas"/>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"    Text="start editing action from sector above" Background="Transparent" Foreground="White" FontFamily="Consolas"/>
                 </Grid>
             </Grid>
         </GroupBox>
@@ -128,7 +128,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="cancel" Command="{Binding DoneCancelCommand}"/>
+                    <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="cancel"  Command="{Binding DoneCancelCommand}"/>
                     <Button Grid.Column="1" Margin="1 2 0 2" Padding="10 3" Content="confirm" Command="{Binding DoneConfirmCommand}"/>
                 </Grid>
                 <Grid Background="Black" Opacity="1" Visibility="{Binding Editing, Converter={StaticResource BoolToVisilityConverter}}">

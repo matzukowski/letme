@@ -3,22 +3,24 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace letme.ViewModels
 {
     [RegionMemberLifetime(KeepAlive = false)]
     public class ManageCommandsViewModel : BindableBase, INavigationAware
     {
+        public string Title => "manage commands";
+
         private IRegionManager _regionManager;
 
-        public DelegateCommand EditButtonClickCommand { get; private set; }
         public DelegateCommand NewButtonClickCommand { get; private set; }
         public DelegateCommand DuplicateCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
+        public DelegateCommand MoveUpCommand { get; private set; }
+        public DelegateCommand MoveDownCommand { get; private set; }
+        public DelegateCommand EditButtonClickCommand { get; private set; }
         public DelegateCommand GoBackCommand { get; private set; }
 
         private SpeechRecognition _speechRecognition;
@@ -48,10 +50,12 @@ namespace letme.ViewModels
 
             SpeechRecognition = speechRecognition;
 
-            EditButtonClickCommand = new DelegateCommand(OpenEditCommandWindow);
             NewButtonClickCommand = new DelegateCommand(OpenNewCommandWindow);
             DuplicateCommand = new DelegateCommand(Duplicate);
             DeleteCommand = new DelegateCommand(Delete);
+            MoveUpCommand = new DelegateCommand(MoveUp);
+            MoveDownCommand = new DelegateCommand(MoveDown);
+            EditButtonClickCommand = new DelegateCommand(OpenEditCommandWindow);
             GoBackCommand = new DelegateCommand(GoBack);
 
             if (SpeechRecognition.Commands.Count > 0)
@@ -60,26 +64,26 @@ namespace letme.ViewModels
             }
         }
 
-        public string Title => "manage commands";
-
-        private void OpenEditCommandWindow()
+        public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            if (SelectedItem != null)
+            if (SpeechRecognition.Commands.Count < 1)
             {
-                NavigationParameters parameters = new NavigationParameters
-                {
-                    { "NewCommand", false},
-                    { "SelectedIndex", SelectedIndex },
-                    { "SelectedActionIndex", -1 },
-                    { "SelectedCommand", new Command(SelectedItem) }
-                };
-
-                _regionManager.RequestNavigate(Names.contentRegion, Names.editCommandView, parameters);
+                SelectedIndex = -1;
             }
             else
             {
-                OpenNewCommandWindow();
+                if (navigationContext != null) SelectedIndex = navigationContext.Parameters.GetValue<int>("SelectedIndex");
             }
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
         }
 
         private void OpenNewCommandWindow()
@@ -129,31 +133,45 @@ namespace letme.ViewModels
             }
         }
 
-        private void GoBack()
+        private void OpenEditCommandWindow()
         {
-            _regionManager.RequestNavigate(Names.contentRegion, Names.startScreenView);
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            if (SpeechRecognition.Commands.Count < 1)
+            if (SelectedItem != null)
             {
-                SelectedIndex = -1;
+                NavigationParameters parameters = new NavigationParameters
+                {
+                    { "NewCommand", false},
+                    { "SelectedIndex", SelectedIndex },
+                    { "SelectedActionIndex", -1 },
+                    { "SelectedCommand", new Command(SelectedItem) }
+                };
+
+                _regionManager.RequestNavigate(Names.contentRegion, Names.editCommandView, parameters);
             }
             else
             {
-                if (navigationContext != null) SelectedIndex = navigationContext.Parameters.GetValue<int>("SelectedIndex");
+                OpenNewCommandWindow();
             }
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
+        private void MoveUp()
         {
-            return true;
+            if (SelectedIndex > 0)
+            {
+                SpeechRecognition.Commands.Move(SelectedIndex, SelectedIndex - 1);
+            }
         }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext)
+        private void MoveDown()
         {
+            if (SelectedIndex < SpeechRecognition.Commands.Count - 1)
+            {
+                SpeechRecognition.Commands.Move(SelectedIndex, SelectedIndex + 1);
+            }
+        }
 
+        private void GoBack()
+        {
+            _regionManager.RequestNavigate(Names.contentRegion, Names.startScreenView);
         }
     }
 }

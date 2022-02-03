@@ -36,6 +36,6 @@ namespace letme.Classes
             }
         }
 
-        public override string ToString() => ActionType.ToString().PadRight(10) + " \"" + Parameter + "\"";
+        public override string ToString() => ActionType.ToString().PadRight(10) + " " + Parameter;
     }
 }

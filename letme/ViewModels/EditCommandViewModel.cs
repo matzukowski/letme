@@ -2,14 +2,14 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace letme.ViewModels
 {
     [RegionMemberLifetime(KeepAlive = false)]
     public class EditCommandViewModel : BindableBase, INavigationAware
     {
+        public string Title => "edit command";
+
         private bool _newCommand = false;
         private bool _addingNew = false;
 
@@ -102,8 +102,6 @@ namespace letme.ViewModels
 
             Editing = false;
         }
-
-        public string Title => "edit command";
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {

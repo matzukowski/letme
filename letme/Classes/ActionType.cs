@@ -9,12 +9,11 @@ namespace letme.Classes
     public enum ActionType
     {
         say,
-        stroke,
+        press,
         hold,
         release,
         type,
         wait,
-        run,
-        buildIn
+        run
     }
 }
