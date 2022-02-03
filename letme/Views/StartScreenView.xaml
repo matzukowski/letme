@@ -13,8 +13,8 @@
 
     <Grid Background="Black">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,18 +22,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" Header="test here if ya need" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-            <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" TextWrapping="NoWrap"/>
-        </GroupBox>
-
-        <GroupBox Grid.Row="1" Grid.Column="0" Margin="2" Header="recognised speech" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+        <GroupBox Grid.Row="0" Grid.Column="0" Margin="2" Header="recognised speech" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
             <TextBox Name="TB" Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas"  IsReadOnly="True" TextWrapping="Wrap" TextChanged="TB_TextChanged"
                      Text="{Binding SpeechRecognition.RecognisedText}"/>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Margin="2" Header="available commands" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+        <GroupBox Grid.Row="0" Grid.Column="1" Margin="2" Header="available commands" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
             <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
                      Text="{Binding SpeechRecognition.Commands, Converter={StaticResource CommandsToPhrasesStringConverter}}"/>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" Header="test here if ya need" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+            <TextBox Margin="0" Padding="5" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" TextWrapping="NoWrap"/>
         </GroupBox>
 
         <GroupBox Grid.Row="2" Grid.Column="0" Margin="2" Header="recognising" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
@@ -65,7 +65,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <!--<Button Grid.Column="0" Padding="10 3" Margin="0 2 1 2" Content="settings" IsEnabled="{Binding SpeechRecognition.IsActive, Converter={StaticResource NegationConverter}}" Command="{Binding OpenSettingsViewCommand}"/>-->
-                    <Button Grid.Column="0" Padding="10 3" Margin="1 2 0 2" Content="manage commands"
+                    <Button Grid.Column="0" Padding="10 3" Margin="0 2 0 2" Content="manage commands"
                             IsEnabled="{Binding SpeechRecognition.IsActive, Converter={StaticResource NegationConverter}}"
                             Command="{Binding OpenManageCommandsViewCommand}"/>
                 </Grid>

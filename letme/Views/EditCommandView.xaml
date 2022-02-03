@@ -28,24 +28,23 @@
             <Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="184*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
 
                     <ListBox Grid.Column="0" Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas"
-                         ItemsSource="{Binding SelectedCommand.CommandActions}"
-                         SelectedIndex="{Binding SelectedActionIndex}"
-                         SelectedItem="{Binding SelectedCommandAction}" Grid.ColumnSpan="2"/>
+                             ItemsSource="{Binding SelectedCommand.CommandActions}"
+                             SelectedIndex="{Binding SelectedActionIndex}"
+                             SelectedItem="{Binding SelectedCommandAction}"/>
 
-                    <GroupBox Grid.Column="2" VerticalAlignment="Top" Margin="2 2 0 2" Header="for selected one" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+                    <GroupBox Grid.Column="1" VerticalAlignment="Top" Margin="2 2 0 2" Header="for selected one" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
                         <StackPanel>
-                            <Button Grid.Row="0" Margin="0 2 0 1" Padding="10 3" Content="add new"      Command="{Binding AddNewCommand}"/>
-                            <Button Grid.Row="1" Margin="0 1 0 1" Padding="10 3" Content="duplicate"    Command="{Binding DuplicateCommand}"/>
-                            <Button Grid.Row="2" Margin="0 1 0 1" Padding="10 3" Content="delete"       Command="{Binding DeleteCommand}"/>
-                            <Button Grid.Row="3" Margin="0 1 0 1" Padding="10 3" Content="move up"      Command="{Binding MoveUpCommand}"/>
-                            <Button Grid.Row="4" Margin="0 1 0 1" Padding="10 3" Content="move down"    Command="{Binding MoveDownCommand}"/>
-                            <Button Grid.Row="5" Margin="0 1 0 2" Padding="10 3" Content="edit"         Command="{Binding EditCommand}"/>
+                            <Button Grid.Row="0" Margin="0 2 0 2" Padding="10 3" Content="add new"      Command="{Binding AddNewCommand}"/>
+                            <Button Grid.Row="1" Margin="0 2 0 2" Padding="10 3" Content="duplicate"    Command="{Binding DuplicateCommand}"/>
+                            <Button Grid.Row="2" Margin="0 2 0 2" Padding="10 3" Content="delete"       Command="{Binding DeleteCommand}"/>
+                            <Button Grid.Row="3" Margin="0 2 0 2" Padding="10 3" Content="move up"      Command="{Binding MoveUpCommand}"/>
+                            <Button Grid.Row="4" Margin="0 2 0 2" Padding="10 3" Content="move down"    Command="{Binding MoveDownCommand}"/>
+                            <Button Grid.Row="5" Margin="0 2 0 2" Padding="10 3" Content="edit"         Command="{Binding EditCommand}"/>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
@@ -78,10 +77,26 @@
                             <RadioButton Content="hold button"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=hold}"/>
                             <RadioButton Content="release button"   Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=release}"/>
                             <RadioButton Content="type text"        Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=type}"/>
-                            <RadioButton Content="wait"             Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=wait}"/>
+                            <RadioButton Content="wait (ms)"             Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=wait}"/>
                             <RadioButton Content="run program"      Background="White" Foreground="White" BorderBrush="Gray" FontFamily="Consolas" IsChecked="{Binding SelectedCommandActionDuplicate.ActionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ActionTypeToBoolConverter}, ConverterParameter=run}"/>
                         </StackPanel>
                     </GroupBox>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Margin="5" Background="Transparent" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="for button actions write parameters"/>
+                        <TextBlock Grid.Row="1" Margin="5" Background="Transparent" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Center" Text="in AutoHotkey scripting language"/>
+                        <TextBlock Grid.Row="2" Margin="5" Background="Transparent" Foreground="White" FontFamily="Consolas" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Hyperlink NavigateUri="https://www.autohotkey.com/docs/commands/Send.htm" RequestNavigate="Hyperlink_RequestNavigate">
+                                click here for some instructions
+                            </Hyperlink>
+                        </TextBlock>
+                    </Grid>
 
                     <GroupBox Grid.Row="1" Grid.Column="2" Margin="1 2 0 2" Header="ready?" Background="Transparent" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
                         <Grid>

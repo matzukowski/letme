@@ -17,7 +17,8 @@ namespace letme.Classes
 {
     public class SpeechRecognition : BindableBase, INotifyPropertyChanged
     {
-        private string _filesPath;
+        private string _AHKPath = "C:\\Program Files\\AutoHotkey\\AutoHotkey.exe";
+        private string _filesPath = "..\\..\\Files";
 
         private SpeechRecognitionEngine _recognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-GB"));
 
@@ -47,12 +48,6 @@ namespace letme.Classes
 
         public SpeechRecognition()
         {
-            string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
-            
-            string exeDir = Path.GetDirectoryName(exeFile);
-
-            _filesPath = Path.Combine(exeDir, @"..\..\Files").Replace("%20", " ");
-
             // Configure the audio output.   
             _synthesizer.SetOutputToDefaultAudioDevice();
 
@@ -195,15 +190,15 @@ namespace letme.Classes
                             break;
 
                         case ActionType.stroke:
-                            TypeString(command.CommandActions[i].Parameter); //TODO: KeyStroke.ahk
+                            KeyStroke(command.CommandActions[i].Parameter);
                             break;
 
                         case ActionType.hold:
-                            KeyHold(command.CommandActions[i].Parameter);
+                            KeyHold(command.CommandActions[i].Parameter); //TODO: key hold
                             break;
 
                         case ActionType.release:
-                            KeyRelease(command.CommandActions[i].Parameter);
+                            KeyRelease(command.CommandActions[i].Parameter); //TODO: key release
                             break;
 
                         case ActionType.type:
@@ -236,7 +231,20 @@ namespace letme.Classes
 
         private void KeyStroke(string parameter)
         {
-            Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", @"C:\KeyStroke.ahk " + parameter);
+            //string aa = _filesPath;
+
+            //string aaa = @"C:\Users\Imm Imm\Desktop\Kod\letme\letme\Files" + @"\KeyStroke.ahk ";
+
+            //var result = Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", aaa + parameter);
+            //var result = Process.Start("\"C:\\Program Files\\AutoHotkey\\AutoHotkey.exe\"", @"..\..\Files\KeyStroke.ahk" + "a");
+
+            //parameter = "abra kadabra";
+
+            //Process.Start("\"C:\\Program Files\\AutoHotkey\\AutoHotkey.exe\"", "\"..\\..\\Files\\KeyStroke.ahk\" " + parameter);
+
+            //Process.Start("\"C:\\Program Files\\AutoHotkey\\AutoHotkey.exe\"", "\"..\\..\\Files\\KeyStroke.ahk\"" + " " + parameter);
+
+            Process.Start(_AHKPath, _filesPath + "\\KeyStroke.ahk " + parameter);
         }
 
         private void KeyHold(string parameter)
@@ -251,17 +259,15 @@ namespace letme.Classes
 
         public void TypeString(string parameter)
         {
-            string aa = _filesPath;
-
-            string aaa = @"C:\Users\Imm Imm\Desktop\Kod\letme\letme\Files" + @"\KeyStroke.ahk ";
-
-            //var result = Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", aaa + parameter);
-            var result = Process.Start(@"C:\Program Files\AutoHotkey\AutoHotkey.exe", @"C:\Users\Imm Imm\Desktop\Kod\letme\letme\Files\KeyStroke.ahk a");
+            Process.Start(_AHKPath, _filesPath + "\\Type.ahk " + "\"" + parameter + "\"");
         }
 
         public void Wait(string parameter)
         {
-            Thread.Sleep(int.Parse(parameter));
+            if(int.TryParse(parameter, out _))
+            {
+                Thread.Sleep(int.Parse(parameter));
+            }
         }
 
         public void Run(string parameter)
@@ -271,8 +277,4 @@ namespace letme.Classes
     }
 }
 
-//TODO: skrypty nie działają
-//TODO: ścieżka do folderu ze skryptami musi być bez spacji :/
-//TODO: ^ plik konfiguracyjny ze ścieżkami do plików?
-//TODO: samouczek https://www.autohotkey.com/docs/commands/Send.htm
-//TODO: skrypt na trzymanie i puszczanie klawisza
+//TODO: samouczek https://www.autohotkey.com/docs/commands/Send.html

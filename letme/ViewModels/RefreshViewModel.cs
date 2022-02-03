@@ -10,9 +10,6 @@ namespace letme.ViewModels
     [RegionMemberLifetime(KeepAlive = false)]
     public class RefreshViewModel : BindableBase
     {
-        public RefreshViewModel()
-        {
-
-        }
+        public RefreshViewModel() { }
     }
 }

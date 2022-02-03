@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:classes="clr-namespace:letme.Classes"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Background="Black">
@@ -20,7 +19,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
@@ -31,29 +29,29 @@
         </Grid.ColumnDefinitions>
 
         <GroupBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2" Header="available commands" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
-            <ListBox Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" Name="LB" SelectionChanged="LB_SelectionChanged"
-                     ItemsSource="{Binding SpeechRecognition.Commands, UpdateSourceTrigger=PropertyChanged}"
-                     SelectedIndex="{Binding SelectedIndex}"
-                     SelectedItem="{Binding SelectedItem}"/>
-        </GroupBox>
-
-        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="2" Header="if ya want to change" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="add" Command="{Binding NewButtonClickCommand}"/>
-                <Button Grid.Column="1" Margin="1 2 1 2" Padding="10 3" Content="edit" Command="{Binding EditButtonClickCommand}"/>
-                <Button Grid.Column="2" Margin="1 2 1 2" Padding="10 3" Content="duplicate" Command="{Binding DuplicateCommand}"/>
-                <Button Grid.Column="3" Margin="1 2 0 2" Padding="10 3" Content="delete" Command="{Binding DeleteCommand}"/>
+                <ListBox Grid.Column="0" Margin="2" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas" Name="LB" SelectionChanged="LB_SelectionChanged"
+                         ItemsSource="{Binding SpeechRecognition.Commands, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedIndex="{Binding SelectedIndex}"
+                         SelectedItem="{Binding SelectedItem}"/>
+
+                <GroupBox Grid.Column="1" Margin="2 2 0 2" VerticalAlignment="Top" Header="options" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+                    <StackPanel>
+                        <Button Grid.Row="0" Margin="0 2 0 2" Padding="10 3" Content="add" Command="{Binding NewButtonClickCommand}"/>
+                        <Button Grid.Row="1" Margin="0 2 0 2" Padding="10 3" Content="edit" Command="{Binding EditButtonClickCommand}"/>
+                        <Button Grid.Row="2" Margin="0 2 0 2" Padding="10 3" Content="duplicate" Command="{Binding DuplicateCommand}"/>
+                        <Button Grid.Row="3" Margin="0 2 0 2" Padding="10 3" Content="delete" Command="{Binding DeleteCommand}"/>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="2" Header="details" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="2" Header="details" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -76,7 +74,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="3" Grid.Column="0" Margin="2" Header="letme" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
+        <GroupBox Grid.Row="2" Grid.Column="0" Margin="2" Header="letme" Background="Black" Foreground="White" BorderBrush="Transparent" FontFamily="Consolas">
             <Button Grid.Column="0" Margin="0 2 1 2" Padding="10 3" Content="go back" Command="{Binding GoBackCommand}"/>
         </GroupBox>
     </Grid>

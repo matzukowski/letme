@@ -55,6 +55,8 @@ namespace letme.ViewModels
 
         private void OpenManageCommandsView()
         {
+            SpeechRecognition.RecognisedText = "";
+
             _regionManager.RequestNavigate(Names.contentRegion, Names.manageCommandsView);
         }
 
