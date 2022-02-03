@@ -47,7 +47,8 @@ namespace letme.Classes
         {
             // Configure the audio output.   
             _synthesizer.SetOutputToDefaultAudioDevice();
-            int a =_synthesizer.Rate;
+
+            _synthesizer.Rate = 0;
 
             LoadFromJSON();
 
@@ -88,9 +89,18 @@ namespace letme.Classes
         {
             Choices vocabulary = new Choices(phrase);
 
+            string[] words = phrase.Split(' ');
+
+            if (words.Length > 1)
+            {
+                foreach (string word in words)
+                {
+                    vocabulary.Add(new Choices(word));
+                }
+            }
+
             Grammar grammar = new Grammar(new GrammarBuilder(vocabulary));
 
-            // Add our vocabulary
             _recognizer.LoadGrammar(grammar);
         }
 
@@ -115,6 +125,14 @@ namespace letme.Classes
                 var serializer = new JavaScriptSerializer();
 
                 Commands = serializer.Deserialize<ObservableCollection<Command>>(json);
+
+                foreach (Command command in Commands)
+                {
+                    foreach (CommandAction action in command.CommandActions)
+                    {
+                        AddVocabulary(action.Parameter);
+                    }
+                }
             }
         }
         public void SaveToJSON()
