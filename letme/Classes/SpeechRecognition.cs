@@ -1,4 +1,4 @@
-﻿using Prism.Mvvm;
+﻿ using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -87,6 +87,11 @@ namespace letme.Classes
 
         public void AddVocabulary(string phrase)
         {
+            if (phrase == "" || phrase == null)
+            {
+                return;
+            }
+
             Choices vocabulary = new Choices(phrase);
 
             string[] words = phrase.Split(' ');
@@ -95,7 +100,10 @@ namespace letme.Classes
             {
                 foreach (string word in words)
                 {
-                    vocabulary.Add(new Choices(word));
+                    if(word != null && word != "")
+                    {
+                        vocabulary.Add(new Choices(word));
+                    }
                 }
             }
 
@@ -111,6 +119,8 @@ namespace letme.Classes
 
             RecognisedText += "> " + input + "\n";
 
+            //RecognisedText += "> (confidence: " + Math.Round(e.Result.Confidence, 3) + ") result: " + input + "\n";
+
             Command command = Commands.FirstOrDefault(x => x.Phrase == input);
 
             await Task.Factory.StartNew(() => { RunCommand(command); });
@@ -125,16 +135,9 @@ namespace letme.Classes
                 var serializer = new JavaScriptSerializer();
 
                 Commands = serializer.Deserialize<ObservableCollection<Command>>(json);
-
-                foreach (Command command in Commands)
-                {
-                    foreach (CommandAction action in command.CommandActions)
-                    {
-                        AddVocabulary(action.Parameter);
-                    }
-                }
             }
         }
+
         public void SaveToJSON()
         {
             var serializer = new JavaScriptSerializer();
@@ -229,3 +232,9 @@ namespace letme.Classes
         }
     }
 }
+//TODO: ładowanie potężnego .txt z angielskimi słowami
+
+//TODO: profile z komendami - kilka plików .json, edycja nazw, ładowanie wybrannego
+//TODO: wywoływanie customowych skryptów po nazwie
+
+//TODO: do rozważenia: wykorzystanie parametru "confidence" po rozpoznaniu mowy w celu eliminacji błędnych akcji

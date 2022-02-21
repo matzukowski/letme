@@ -273,11 +273,6 @@ namespace letme.ViewModels
 
             SpeechRecognition.AddVocabulary(SelectedCommand.Phrase);
 
-            foreach(CommandAction action in SelectedCommand.CommandActions)
-            {
-                SpeechRecognition.AddVocabulary(action.Parameter);
-            }
-
             NavigationParameters parameters = new NavigationParameters
             {
                 { "SelectedIndex", SelectedCommandIndex }
