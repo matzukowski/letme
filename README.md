@@ -5,6 +5,8 @@ Substitute for a voice assistant providing more practical functionalities for th
 
 App was implemented in C# language using WPF with Prism framework and AutoHotkey scripting language.
 
+**Won't work without Windows speech recognition engine and AutoHotkey installed!**
+
 <br><br>
 ![image](https://user-images.githubusercontent.com/49719143/213235617-5d8578a3-f97d-4061-b1f9-f9e7f9c5d732.png)
 <br><br><br>
